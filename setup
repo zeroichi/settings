@@ -1,0 +1,26 @@
+#!/bin/bash
+
+cd `dirname $0`
+
+. my-funcs
+
+add-code ~/.bashrc "# zeroichi's customization #" <<EOS
+if [ -f $PWD/bashrc ]; then
+	. $PWD/bashrc
+fi
+EOS
+
+add-code ~/.bash_profile "# zeroichi's customization #" <<EOS
+if [ -f $PWD/bash_profile ]; then
+	. $PWD/bash_profile
+fi
+EOS
+
+if [ ! -e ~/.vimrc ]; then
+	ln -s $PWD/vimrc ~/.vimrc
+fi
+
+if [ ! -e ~/.tmux.conf ]; then
+	ln -s $PWD/tmux.conf ~/.tmux.conf
+fi
+

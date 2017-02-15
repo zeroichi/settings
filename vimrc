@@ -1,5 +1,5 @@
 " setting
-"文字コードをUFT-8に設定
+" 文字コードをUTF-8に設定
 set fenc=utf-8
 " バックアップファイルを作らない
 set nobackup
@@ -11,6 +11,8 @@ set autoread
 set hidden
 " 入力中のコマンドをステータスに表示する
 set showcmd
+" Enable mode lines
+set modeline
 
 
 " 見た目系
@@ -21,9 +23,10 @@ set cursorline
 " 現在の行を強調表示（縦）
 " set cursorcolumn
 " 行末の1文字先までカーソルを移動できるように
-set virtualedit=onemore
+" set virtualedit=onemore
 " インデントはスマートインデント
-set smartindent
+" set smartindent
+set autoindent
 " ビープ音を可視化
 set visualbell
 " 括弧入力時の対応する括弧を表示
@@ -41,7 +44,7 @@ nnoremap k gk
 " 不可視文字を可視化(タブが「▸-」と表示される)
 set list listchars=tab:\>\-
 " Tab文字を半角スペースにする
-set expandtab
+" set expandtab
 " 行頭以外のTab文字の表示幅（スペースいくつ分）
 set tabstop=4
 " 行頭でのTab文字の表示幅
