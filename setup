@@ -10,7 +10,11 @@ if [ -f $PWD/bashrc ]; then
 fi
 EOS
 
-add-code ~/.bash_profile "# zeroichi's customization #" <<EOS
+PROFILE_FILE=~/.bash_profile
+if [ -f ~/.profile ]; then
+	PROFILE_FILE=~/.profile
+fi
+add-code $PROFILE_FILE "# zeroichi's customization #" <<EOS
 if [ -f $PWD/bash_profile ]; then
 	. $PWD/bash_profile
 fi
@@ -23,4 +27,3 @@ fi
 if [ ! -e ~/.tmux.conf ]; then
 	ln -s $PWD/tmux.conf ~/.tmux.conf
 fi
-
