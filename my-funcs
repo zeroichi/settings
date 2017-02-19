@@ -1,39 +1,67 @@
 # vim:set ft=sh:
 
+function die {
+    echo "$@" 1>&2
+}
+
+function get-filesize {
+    LANG=C ls -l $1 | awk '{print $5}'
+}
+
+function get-sha1 {
+    sha1sum $1 | cut -d\  -f1
+}
+
+# 
+function is-different {
+    if [ $(get-filesize $1) -ne $(get-filesize $2) ]; then
+        # echo "file size differ" 1>&2
+        true
+    elif [ $(get-sha1 $1) != $(get-sha1 $2) ]; then
+        true
+        # echo "sha1 differ" 1>&2
+    else
+        false
+    fi
+}
+
 # file back up
-function bu {
-	if [ $# -lt 1 ]; then
-		echo specify a filename.
-		return 1
-	fi
-	if [ ! -e $1 ]; then
-		echo "'$1'" does not exist.
-		return 2
-	fi
-	latest=$(find `dirname $1` -regextype posix-egrep -regex '.*[0-9]{6}-[0-9]{6}$' | sort | tail -1)
-	if [ ! -z "$latest" ]; then
-		echo
-	fi
-	cp -a $1{,.$(date '+%y%m%d-%H%M%S')}
+function backup-file {
+    if [ $# -lt 1 ]; then
+        echo specify a filename.
+        return 1
+    fi
+    if [ ! -e $1 ]; then
+        echo "'$1' does not exist."
+        return 2
+    fi
+    latest=$(find `dirname $1` -regextype posix-egrep -regex '.*[0-9]{6}-[0-9]{6}$' | sort | tail -1)
+    if [ -z "$latest" ] || is-different $1 $latest; then
+        dest=$1.$(date '+%y%m%d-%H%M%S')
+        cp -a $1 $dest
+        echo "the file has been backed up to $dest."
+    else
+        echo "the file has already backed up. skipping."
+    fi
 }
 
 # add code to a file
 # w/ duplication check
 function add-code {
-	if [ $# -lt 2 ]; then
-		echo 'required 2 arguments'
-		return 1
-	fi
-	file=$1
-	signature=$2
-	if grep "$signature" "$file" >/dev/null 2>&1; then
-		echo 'installed'
-		# already installed
-		# cat > /dev/null
-	else
-		echo 'not installed: add.'
-		echo "$signature" >> $file
-		cat >> $file
-	fi
+    if [ $# -lt 2 ]; then
+        echo 'required 2 arguments'
+        return 1
+    fi
+    file=$1
+    signature=$2
+    if grep "$signature" "$file" >/dev/null 2>&1; then
+        # already installed
+        echo "Already installed in '$file'. Skipping."
+    else
+        # inject code to a file
+        echo "$signature" >> $file
+        cat >> $file
+        echo "A script has been injected to '$file'."
+    fi
 }
 

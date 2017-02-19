@@ -6,24 +6,29 @@ cd `dirname $0`
 
 add-code ~/.bashrc "# zeroichi's customization #" <<EOS
 if [ -f $PWD/bashrc ]; then
-	. $PWD/bashrc
+    . $PWD/bashrc
 fi
 EOS
 
+# note: if ~/.bash_profile exists, .profile would be ignored.
 PROFILE_FILE=~/.bash_profile
 if [ -f ~/.profile ]; then
-	PROFILE_FILE=~/.profile
+    PROFILE_FILE=~/.profile
 fi
 add-code $PROFILE_FILE "# zeroichi's customization #" <<EOS
 if [ -f $PWD/bash_profile ]; then
-	. $PWD/bash_profile
+    . $PWD/bash_profile
 fi
 EOS
 
+# install .vimrc
 if [ ! -e ~/.vimrc ]; then
-	ln -s $PWD/vimrc ~/.vimrc
+    ln -s $PWD/vimrc ~/.vimrc
+    echo .vimrc has been installed.
 fi
 
+# install .tmux.conf
 if [ ! -e ~/.tmux.conf ]; then
-	ln -s $PWD/tmux.conf ~/.tmux.conf
+    ln -s $PWD/tmux.conf ~/.tmux.conf
+    echo .tmux.conf has been installed.
 fi
