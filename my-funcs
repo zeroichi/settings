@@ -65,3 +65,13 @@ function add-code {
     fi
 }
 
+function show-args {
+  NUM=1
+  echo '$0 = '\'$0\'
+  while [ $# -ne 0 ]; do
+    echo "\$${NUM} = "\'$1\'
+    shift
+    NUM=$((NUM + 1))
+  done
+}
+
