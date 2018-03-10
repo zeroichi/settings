@@ -26,9 +26,11 @@ set cursorline
 " set cursorcolumn
 " 行末の1文字先までカーソルを移動できるように
 " set virtualedit=onemore
-" インデントはスマートインデント
-" set smartindent
+" auto indenting
+set smartindent
 set autoindent
+set pastetoggle=<F3>
+
 " ビープ音を可視化
 set visualbell
 " 括弧入力時の対応する括弧を表示
