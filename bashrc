@@ -1,8 +1,18 @@
 script_dir=$(cd $(dirname ${BASH_SOURCE:-$0}); pwd)
 . $script_dir/my-funcs
 
-# aliases
-alias ls='ls -F --color=auto'
+case "$(uname)" in
+Darwin)
+    # macOS aliases
+    alias ls='ls -FG'
+    ;;
+*)
+    # GNU style aliases
+    alias ls='ls -F --color=auto'
+    ;;
+esac
+
+# common aliases
 alias l='ls'
 alias ll='ls -l'
 alias la='ls -a'
