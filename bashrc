@@ -22,3 +22,7 @@ alias reload_bashrc='. ~/.bashrc'
 alias rb=reload_bashrc
 alias df='LANG=C df'
 alias bu='backup-file'
+
+if [ "$(lsb_release -is 2>&1)" = "Ubuntu" ]; then
+    alias updatepkg="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y"
+fi
