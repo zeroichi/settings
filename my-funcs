@@ -75,3 +75,14 @@ function show-args {
   done
 }
 
+# Convert a file into pastable bash command.
+#
+# Usage:
+#   f2txt <filename>
+function f2txt {
+  if [ ! -r "$1" ]; then echo "f2txt: Can not read file: $1"; return 1; fi
+  if [ -d "$1" ]; then echo "f2txt: Is directory: $1"; return 2; fi
+  echo "cat <<EOS | base64 -d | gzip -d -c > $(basename $1)"
+  gzip -c $1 | base64 -w$COLUMNS
+  echo "EOS"
+}
