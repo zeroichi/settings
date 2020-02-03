@@ -1,18 +1,22 @@
 # vim:set ft=sh:
 
+# Print a message to stderr and exit current process
 function die {
     echo "$@" 1>&2
+    exit 1
 }
 
+# Get file size
 function get-filesize {
     LANG=C ls -l $1 | awk '{print $5}'
 }
 
+# Get SHA1 hash (no file name print)
 function get-sha1 {
     sha1sum $1 | cut -d\  -f1
 }
 
-# 
+# Check if two files are differ by file size and hash
 function is-different {
     if [ $(get-filesize $1) -ne $(get-filesize $2) ]; then
         # echo "file size differ" 1>&2
@@ -25,7 +29,7 @@ function is-different {
     fi
 }
 
-# file back up
+# Back up a file (copy and rename)
 function backup-file {
     if [ $# -lt 1 ]; then
         echo specify a filename.
@@ -45,8 +49,11 @@ function backup-file {
     fi
 }
 
-# add code to a file
-# w/ duplication check
+# Inject code into a file.
+# To avoid duplication, do nothing if signiture already exists in the file
+#
+# Usage:
+#   add-code <filename> <signture>
 function add-code {
     if [ $# -lt 2 ]; then
         echo 'required 2 arguments'
@@ -65,6 +72,7 @@ function add-code {
     fi
 }
 
+# Print arguments one per line with indexing (for debug use)
 function show-args {
     NUM=1
     echo '$0 = '\'$0\'
