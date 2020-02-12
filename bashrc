@@ -26,3 +26,6 @@ alias bu='backup-file'
 if [ "$(lsb_release -is 2>&1)" = "Ubuntu" ]; then
     alias updatepkg="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y"
 fi
+
+# record command execution time in history
+HISTTIMEFORMAT='%Y-%m-%dT%T%z '
