@@ -94,3 +94,30 @@ function f2txt {
     gzip -c $1 | base64 -w$COLUMNS
     echo "EOS"
 }
+
+# Encrypt a file
+function gzencrypt {
+    if [ ! -r "$1" ]; then echo "gzencrypt: Cannot read file: $1"; return 1; fi
+    read -s -p "Password: " PASSWORD; echo
+    gzip -c "$1" | openssl enc -e -a -pbkdf2 -aes-256-cbc -salt -pass file:<(echo $PASSWORD) -out $1.aes
+    unset PASSWORD
+}
+
+# Decrypt a file
+function gzdecrypt {
+    if [ ! -r "$1" ]; then echo "gzencrypt: Cannot read file: $1"; return 1; fi
+    read -s -p "Password: " PASSWORD; echo
+    openssl enc -d -a -pbkdf2 -aes-256-cbc -salt -pass file:<(echo $PASSWORD) -in $1 -out $1.tmp
+    if [ "$?" -eq 0 -a -r $1.tmp ]; then
+        OUT="${1%\.aes}"
+        if [ "$1" = "$OUT" ]; then
+            OUT="$1.decrypted"
+        fi
+        gzip -d -c $1.tmp > "$OUT"
+    else
+        echo "[ERROR] Failed to decrypt. Maybe incorrect password?"
+        return 1
+    fi
+    rm -rf $1.tmp
+    unset PASSWORD
+}
