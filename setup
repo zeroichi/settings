@@ -4,16 +4,21 @@ cd `dirname $0`
 
 . my-funcs
 
+# injection into .bashrc
 add-code ~/.bashrc "# zeroichi's customization #" <<EOS
 if [ -f $PWD/bashrc ]; then
     . $PWD/bashrc
 fi
 EOS
 
-# note: if ~/.bash_profile exists, .profile would be ignored.
-PROFILE_FILE=~/.bash_profile
-if [ -f ~/.profile ]; then
-    PROFILE_FILE=~/.profile
+# injection into .profile
+# note: bash looks for .bash_profile, .bash_login, and .profile, in that order
+PROFILE_FILE=~/.profile
+if [ -r ~/.bash_login ]; then
+    PROFILE_FILE=~/.bash_login
+fi
+if [ -r ~/.bash_profile ]; then
+    PROFILE_FILE=~/.bash_profile
 fi
 add-code $PROFILE_FILE "# zeroichi's customization #" <<EOS
 if [ -f $PWD/bash_profile ]; then
