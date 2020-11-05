@@ -12,6 +12,11 @@ Darwin)
     ;;
 esac
 
+# tmux aliases (if tmux is installed)
+if check-cmd tmux; then
+    alias newtmux='tmux new -s'
+fi
+
 # common aliases
 alias l='ls'
 alias ll='ls -l'
