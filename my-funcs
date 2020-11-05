@@ -29,6 +29,11 @@ function is-different {
     fi
 }
 
+# Check if a command is runnable
+function check-cmd {
+    hash "$1" >/dev/null 2>&1
+}
+
 # Back up a file (copy and rename)
 function backup-file {
     if [ $# -lt 1 ]; then
