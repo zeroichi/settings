@@ -12,7 +12,7 @@ fi
 if [ "$SYSNAME" = Linux -a "$DIST" = Ubuntu ]; then
     sudo sed -i.bak -r -e "s%http://(.*)archive.ubuntu.com/ubuntu%http://ftp.iij.ad.jp/pub/linux/ubuntu/archive%g" /etc/apt/sources.list
     sudo -E apt update && sudo -E apt upgrade -y && sudo -E apt autoremove -y
-    sudo -E apt install -y vim tmux sysstat
+    sudo -E apt install -y vim tmux sysstat curl
 fi
 
 # git configuration
