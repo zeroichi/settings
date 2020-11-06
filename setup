@@ -4,6 +4,20 @@ cd `dirname $0`
 
 . my-funcs
 
+SYSNAME=$(uname -s)
+if check-cmd lsb_release; then
+    DIST=$(lsb_release -i -s)
+fi
+# install software packages
+if [ "$SYSNAME" = Linux -a "$DIST" = Ubuntu ]; then
+    sudo sed -i.bak -r -e "s%http://(.*)archive.ubuntu.com/ubuntu%http://ftp.iij.ad.jp/pub/linux/ubuntu/archive%g" /etc/apt/sources.list
+    sudo -E apt update && sudo -E apt upgrade -y && sudo -E apt autoremove -y
+    sudo -E apt install -y vim tmux sysstat
+fi
+
+# git configuration
+git config --global core.editor vim
+
 # injection into .bashrc
 add-code ~/.bashrc "# zeroichi's customization #" <<EOS
 if [ -f $PWD/bashrc ]; then
