@@ -14,7 +14,7 @@ esac
 
 # tmux aliases (if tmux is installed)
 if check-cmd tmux; then
-    alias newtmux='tmux new -s'
+    alias newtmux="tmux -f $script_dir/tmux.conf new -s"
 fi
 
 # common aliases
