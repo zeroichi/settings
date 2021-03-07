@@ -7,12 +7,17 @@ cd `dirname $0`
 SYSNAME=$(uname -s)
 if check-cmd lsb_release; then
     DIST=$(lsb_release -i -s)
+elif [ -r /etc/redhat-release ]; then
+    DIST=$(cat /etc/redhat-release | awk '{print $1}')
 fi
 # install software packages
 if [ "$SYSNAME" = Linux -a "$DIST" = Ubuntu ]; then
     sudo sed -i.bak -r -e "s%http://(.*)archive.ubuntu.com/ubuntu%http://ftp.iij.ad.jp/pub/linux/ubuntu/archive%g" /etc/apt/sources.list
     sudo -E apt update && sudo -E apt upgrade -y && sudo -E apt autoremove -y
     sudo -E apt install -y vim tmux sysstat curl
+elif [ "$SYSNAME" = Linux -a "$DIST" = CentOS ]; then
+    sudo -E yum update -y
+    sudo -E yum install -y vim-enhanced tmux sysstat curl
 fi
 
 # git configuration
