@@ -84,7 +84,7 @@ if [ "$ANS" != "y" -a "$ANS" != "Y" ]; then
 fi
 
 # Check if the base image exists
-if [ ! -r "$BASE_PATH" ]; then
+if [ ! -r "$BASE_PATH" ] && sudo [ ! -r "$BASE_PATH" ]; then
   echo "error: base image file $BASE_PATH not found."
   exit 1
 fi
