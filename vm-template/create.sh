@@ -164,12 +164,13 @@ runcmd:
 #- curl -fsSL "https://releases.rancher.com/install-docker/19.03.sh" -o /tmp/install-docker.sh
 #- sh /tmp/install-docker.sh
 #- usermod -aG docker vmuser
+- sleep 1
 - echo "                                         "
-- echo "############ SETUP COMPLETED ############"
+- echo "@@@@@@@@@@@@ SETUP COMPLETED @@@@@@@@@@@@"
 - echo "                                         "
 - echo "  Press Ctrl+] to detach from console    "
 - echo "                                         "
-- echo "#########################################"
+- echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
 - echo "                                         "
 EOS
 
