@@ -25,6 +25,8 @@ fi
 
 # git configuration
 git config --global core.editor vim
+git config --global user.name zeroichi
+git config --global user.email 'zeroichi@users.noreply.github.com'
 
 # injection into .bashrc
 add-code ~/.bashrc "# zeroichi's customization #" <<EOS
