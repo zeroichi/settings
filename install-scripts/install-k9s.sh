@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-VER=v0.23.10
+VER=v0.24.9
 URL=https://github.com/derailed/k9s/releases/download/$VER/k9s_Linux_x86_64.tar.gz
 PKG_FILE=$(basename "$URL")
 INST_DIR=/opt/k9s
@@ -11,6 +11,9 @@ echo "Downloading package from $URL ..."
 cd /tmp
 if [ ! -f "$PKG_FILE" -o "$1" = "-f" ]; then
     curl -L "$URL" -o "$PKG_FILE"
+else
+    echo "/tmp/$PKG_FILE already exists. skip downloading"
+    echo "(if you want to force downloading, pass -f option)"
 fi
 echo
 
