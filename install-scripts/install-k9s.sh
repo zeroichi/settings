@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-VER=v0.24.9
+VER=v0.24.15
 URL=https://github.com/derailed/k9s/releases/download/$VER/k9s_Linux_x86_64.tar.gz
 PKG_FILE=$(basename "$URL")
 INST_DIR=/opt/k9s
