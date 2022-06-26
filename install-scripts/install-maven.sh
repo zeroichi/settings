@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-VER=3.8.1
+VER=3.8.6
 URL=https://ftp.jaist.ac.jp/pub/apache/maven/maven-3/$VER/binaries/apache-maven-$VER-bin.tar.gz
 PKG_FILE=$(basename "$URL")
 INST_DIR=/opt/mvn
