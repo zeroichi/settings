@@ -12,7 +12,7 @@ elif [ -r /etc/redhat-release ]; then
 fi
 # install software packages
 if [ "$SYSNAME" = Linux -a "$DIST" = Ubuntu ]; then
-    sudo sed -i.bak -r -e "s%http://(.*)archive.ubuntu.com/ubuntu%http://ftp.iij.ad.jp/pub/linux/ubuntu/archive%g" /etc/apt/sources.list
+    sudo sed -i.bak -r -e "s%https?://(.*)(archive.ubuntu.com|mirrors.edge.kernel.org)/ubuntu%http://ftp.iij.ad.jp/pub/linux/ubuntu/archive%g" /etc/apt/sources.list
     sudo -E apt update && sudo -E apt upgrade -y && sudo -E apt autoremove -y
     sudo -E apt install -y vim tmux sysstat curl
 elif [ "$SYSNAME" = Linux -a "$DIST" = Debian ]; then
