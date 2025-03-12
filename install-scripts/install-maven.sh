@@ -1,10 +1,10 @@
 #!/bin/bash
 set -e
 
-VER=3.9.8
+VER=3.9.9
 URL=https://dlcdn.apache.org/maven/maven-3/$VER/binaries/apache-maven-${VER}-bin.tar.gz
 # note: paste hash from https://downloads.apache.org/maven/maven-3/3.8.6/binaries/apache-maven-3.8.6-bin.tar.gz.sha512
-HASH=7d171def9b85846bf757a2cec94b7529371068a0670df14682447224e57983528e97a6d1b850327e4ca02b139abaab7fcb93c4315119e6f0ffb3f0cbc0d0b9a2
+HASH=a555254d6b53d267965a3404ecb14e53c3827c09c3b94b5678835887ab404556bfaf78dcfe03ba76fa2508649dca8531c74bca4d5846513522404d48e8c4ac8b
 PKG_FILE=$(basename "$URL")
 INST_DIR=/opt/mvn
 SLINK_DIR=/usr/local/bin
