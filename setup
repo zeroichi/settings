@@ -19,6 +19,9 @@ if [ "$SYSNAME" = Linux -a "$DIST" = Ubuntu ]; then
     fi
     sudo -E apt update && sudo -E apt upgrade -y && sudo -E apt autoremove -y
     sudo -E apt install -y vim tmux sysstat curl
+elif [[ "$SYSNAME" = Linux && "$DIST" = Linuxmint ]]; then
+    sudo -E apt update && sudo -E apt upgrade -y && sudo -E apt autoremove -y
+    sudo -E apt install -y vim tmux sysstat curl
 elif [ "$SYSNAME" = Linux -a "$DIST" = Debian ]; then
     sudo -E apt update && sudo -E apt upgrade -y && sudo -E apt autoremove -y
     sudo -E apt install -y vim tmux sysstat curl
