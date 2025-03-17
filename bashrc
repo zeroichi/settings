@@ -32,7 +32,7 @@ alias rb=reload_bashrc
 alias df='LANG=C df'
 alias bu='backup-file'
 
-if [ "$(lsb_release -is 2>&1)" = "Ubuntu" ]; then
+if [[ "$(lsb_release -is 2>&1)" = "Ubuntu" || "$(lsb_release -is 2>&1)" = "Linuxmint" ]]; then
     alias updatepkg="sudo -E apt update && sudo -E apt upgrade -y && sudo -E apt autoremove -y"
 fi
 
